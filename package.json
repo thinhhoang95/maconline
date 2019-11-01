@@ -1,0 +1,27 @@
+{
+  "name": "maconline",
+  "version": "1.0.0",
+  "description": "MAC Online Scoring and Announcement System",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node server.js"
+  },
+  "author": "Hoang Dinh Thinh",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.7",
+    "promise": "^8.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/node": "^7.6.3",
+    "@babel/preset-env": "^7.6.3",
+    "eslint": "^6.6.0",
+    "nodemon": "^1.19.4"
+  }
+}

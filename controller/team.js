@@ -33,109 +33,122 @@ export const deleteScore = async (id, referee) => {
 export const showAllTeams = async() => {
     const aggregateRules = [
         {
-            '$unwind': {
-                'path': '$fCompletionTime',
-                'includeArrayIndex': '_id2',
-                'preserveNullAndEmptyArrays': true
-            }
+          '$unwind': {
+            'path': '$fCompletionTime', 
+            'includeArrayIndex': '_id2', 
+            'preserveNullAndEmptyArrays': true
+          }
         }, {
-            '$group': {
-                '_id': '$_id',
-                'fCompletionTime': {
-                    '$avg': '$fCompletionTime.value'
-                },
-                'rfCompletionTime': {
-                    '$push': '$fCompletionTime.referee'
-                },
-                'dropDistance': {
-                    '$first': '$dropDistance'
-                },
-                'dCompletionTime': {
-                    '$first': '$dCompletionTime'
-                },
-                'teamName': {
-                    '$first': '$teamName'
-                },
-                'teamMembers': {
-                    '$first': '$teamMembers'
-                },
-                'acType': {
-                    '$first': '$acType'
-                }
+          '$group': {
+            '_id': '$_id', 
+            'fCompletionTime': {
+              '$avg': '$fCompletionTime.value'
+            }, 
+            'rfCompletionTime': {
+              '$push': '$fCompletionTime.referee'
+            }, 
+            'dropDistance': {
+              '$first': '$dropDistance'
+            }, 
+            'dCompletionTime': {
+              '$first': '$dCompletionTime'
+            }, 
+            'teamName': {
+              '$first': '$teamName'
+            }, 
+            'teamMembers': {
+              '$first': '$teamMembers'
+            }, 
+            'acType': {
+              '$first': '$acType'
+            }, 
+            'order': {
+              '$first': '$order'
             }
+          }
         }, {
-            '$unwind': {
-                'path': '$dropDistance',
-                'includeArrayIndex': '_id3',
-                'preserveNullAndEmptyArrays': true
-            }
+          '$unwind': {
+            'path': '$dropDistance', 
+            'includeArrayIndex': '_id3', 
+            'preserveNullAndEmptyArrays': true
+          }
         }, {
-            '$group': {
-                '_id': '$_id',
-                'dropDistance': {
-                    '$avg': '$dropDistance.value'
-                },
-                'rdropDistance': {
-                    '$push': '$dropDistance.referee'
-                },
-                'fCompletionTime': {
-                    '$first': '$fCompletionTime'
-                },
-                'rfCompletionTime': {
-                    '$first': '$rfCompletionTime'
-                },
-                'dCompletionTime': {
-                    '$first': '$dCompletionTime'
-                },
-                'teamName': {
-                    '$first': '$teamName'
-                },
-                'teamMembers': {
-                    '$first': '$teamMembers'
-                },
-                'acType': {
-                    '$first': '$acType'
-                }
+          '$group': {
+            '_id': '$_id', 
+            'dropDistance': {
+              '$avg': '$dropDistance.value'
+            }, 
+            'rdropDistance': {
+              '$push': '$dropDistance.referee'
+            }, 
+            'fCompletionTime': {
+              '$first': '$fCompletionTime'
+            }, 
+            'rfCompletionTime': {
+              '$first': '$rfCompletionTime'
+            }, 
+            'dCompletionTime': {
+              '$first': '$dCompletionTime'
+            }, 
+            'teamName': {
+              '$first': '$teamName'
+            }, 
+            'teamMembers': {
+              '$first': '$teamMembers'
+            }, 
+            'acType': {
+              '$first': '$acType'
+            }, 
+            'order': {
+              '$first': '$order'
             }
+          }
         }, {
-            '$unwind': {
-                'path': '$dCompletionTime',
-                'includeArrayIndex': '_id4',
-                'preserveNullAndEmptyArrays': true
-            }
+          '$unwind': {
+            'path': '$dCompletionTime', 
+            'includeArrayIndex': '_id4', 
+            'preserveNullAndEmptyArrays': true
+          }
         }, {
-            '$group': {
-                '_id': '$_id',
-                'dCompletionTime': {
-                    '$avg': '$dCompletionTime.value'
-                },
-                'rdCompletionTime': {
-                    '$push': '$dCompletionTime.referee'
-                },
-                'fCompletionTime': {
-                    '$first': '$fCompletionTime'
-                },
-                'rfCompletionTime': {
-                    '$first': '$rfCompletionTime'
-                },
-                'rdropDistance': {
-                    '$first': '$rdropDistance'
-                },
-                'dropDistance': {
-                    '$first': '$dropDistance'
-                },
-                'teamName': {
-                    '$first': '$teamName'
-                },
-                'teamMembers': {
-                    '$first': '$teamMembers'
-                },
-                'acType': {
-                    '$first': '$acType'
-                }
+          '$group': {
+            '_id': '$_id', 
+            'dCompletionTime': {
+              '$avg': '$dCompletionTime.value'
+            }, 
+            'rdCompletionTime': {
+              '$push': '$dCompletionTime.referee'
+            }, 
+            'fCompletionTime': {
+              '$first': '$fCompletionTime'
+            }, 
+            'rfCompletionTime': {
+              '$first': '$rfCompletionTime'
+            }, 
+            'rdropDistance': {
+              '$first': '$rdropDistance'
+            }, 
+            'dropDistance': {
+              '$first': '$dropDistance'
+            }, 
+            'teamName': {
+              '$first': '$teamName'
+            }, 
+            'teamMembers': {
+              '$first': '$teamMembers'
+            }, 
+            'acType': {
+              '$first': '$acType'
+            }, 
+            'order': {
+              '$first': '$order'
             }
+          }
+        }, {
+          '$sort': {
+            'order': 1
+          }
         }
-    ];
+      ];
     let teams = await Team.aggregate(aggregateRules);
     return new Promise((resolve) => resolve(teams));
 }

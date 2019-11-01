@@ -9,6 +9,7 @@ let TeamSchema = new mongoose.Schema({
     teamName: String,
     teamMembers: String,
     acType: Number,
+    order: Number,
     fCompletionTime: [ScoreSchema],
     dropDistance: [ScoreSchema],
     dCompletionTime: [ScoreSchema]
